@@ -93,7 +93,7 @@ int main(void)
   MX_USART1_UART_Init();
   /* USER CODE BEGIN 2 */
 
-  int led[] = {GPIO_PIN_4, GPIO_PIN_5, GPIO_PIN_6};
+  int led[] = {GPIO_PIN_4, GPIO_PIN_5, GPIO_PIN_6, GPIO_PIN_7};
   int i = 0;
   //char msg = 'w';
   int prev_clk = 1;
@@ -118,22 +118,23 @@ int main(void)
     {
         if (dt == 0)
         {
-            i++;
+            i--;
         }
         else
         {
-            i--;
+            i++;
         }
 
-        if(i >= 3)
+        if(i >= 4)
           i = 0;
         if(i < 0)
-          i = 2;
+          i = 3;
 
         //HAL_GPIO_TogglePin(GPIOA, led[i]);
         HAL_GPIO_WritePin(GPIOA, GPIO_PIN_4, 0);
         HAL_GPIO_WritePin(GPIOA, GPIO_PIN_5, 0);
         HAL_GPIO_WritePin(GPIOA, GPIO_PIN_6, 0);
+        HAL_GPIO_WritePin(GPIOA, GPIO_PIN_7, 0);
         HAL_GPIO_WritePin(GPIOA, led[i], 1);
     }
 
@@ -154,7 +155,7 @@ int main(void)
 
 
     //HAL_UART_Transmit(&huart1, (uint8_t*)&msg, 1, 1000);
-    HAL_Delay(5);
+    HAL_Delay(10);
   }
   /* USER CODE END 3 */
 }
